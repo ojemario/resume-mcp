@@ -1,0 +1,70 @@
+---
+description: This file defines the OpenAIService class, which interacts with the OpenAI API to enhance resumes based on codebase analysis.
+globs: ['src/openai.ts']
+alwaysApply: false
+---
+
+# OpenAIService Class Documentation
+
+## Overview
+The `OpenAIService` class is designed to interact with the OpenAI API to generate resume enhancements based on codebase analysis. It provides methods to create new project entries and skills for a resume, ensuring that the enhancements are professional and aligned with the JSON Resume format.
+
+## Key Components
+
+### Class: `OpenAIService`
+- **Purpose**: To facilitate communication with the OpenAI API for generating resume enhancements.
+- **Constructor**: Initializes the service with an API key, ensuring that the key is provided.
+
+### Methods
+
+#### `generateResumeEnhancement`
+- **Description**: Asynchronously generates a new project and skills based on a given codebase analysis.
+- **Parameters**: 
+  - `codebaseAnalysis`: An object of type `CodebaseAnalysisResult` containing the analysis of the codebase.
+- **Returns**: A promise that resolves to a `ResumeUpdate` object.
+- **Functionality**: 
+  - Prepares a request to the OpenAI API using a structured prompt.
+  - Validates the response using a predefined schema (`resumeUpdateSchema`).
+  - Handles errors related to API communication and response validation.
+
+#### `enhanceResume`
+- **Description**: Adds new projects and skills to an existing resume without altering existing content.
+- **Parameters**:
+  - `resume`: The current resume object.
+  - `update`: The `ResumeUpdate` object containing new projects and skills.
+- **Returns**: An updated `Resume` object.
+- **Functionality**: 
+  - Ensures new projects and skills are added only if they do not already exist in the resume.
+  - Preserves any existing metadata such as `_gistId`.
+
+#### `generateUpdateSummary`
+- **Description**: Generates a concise summary of updates made to a resume.
+- **Parameters**:
+  - `changes`: An array of strings describing the changes made.
+- **Returns**: A string summarizing the updates.
+- **Functionality**: 
+  - Utilizes the OpenAI API to create a professional summary of the changes.
+  - Provides a default summary in case of API errors.
+
+## Dependencies
+- **Imports**: 
+  - `OpenAI` from the `openai` package for API interactions.
+  - Various types and schemas from local files (`types.js`, `codebase.js`, `schemas.js`).
+- **No External Dependencies**: This file does not import or is imported by any other files in the repository.
+
+## Usage Example
+To use the `OpenAIService`, instantiate it with a valid API key and call its methods with appropriate parameters:
+
+```typescript
+const openAIService = new OpenAIService('your-api-key');
+const codebaseAnalysis = { /* codebase analysis data */ };
+const resumeUpdate = await openAIService.generateResumeEnhancement(codebaseAnalysis);
+const updatedResume = await openAIService.enhanceResume(existingResume, resumeUpdate);
+const summary = await openAIService.generateUpdateSummary(resumeUpdate.changes);
+```
+
+## Best Practices
+- **API Key Management**: Ensure that the API key is securely stored and not hardcoded in the source code.
+- **Error Handling**: Implement robust error handling to manage potential API errors and schema validation issues.
+- **Data Validation**: Use the provided schemas to validate data structures before processing them.
+- **Version Control**: Keep track of changes to the resume and ensure that updates are consistent with the existing format and content.

@@ -1,0 +1,48 @@
+---
+description: This file defines and exports schemas for validating project, skill, and resume update data using the Zod library.
+globs: ['src/schemas.ts']
+alwaysApply: false
+---
+
+### Overview
+The `src/schemas.ts` file is a TypeScript module that defines and exports data validation schemas using the Zod library. These schemas are used to ensure that data structures related to projects, skills, and resume updates conform to expected formats and constraints. This is particularly useful in applications that require strict data validation, such as those involving user-generated content or API interactions.
+
+### Key Components
+
+- **ISO Date Schema**: A regular expression-based schema for validating date strings in the ISO format (YYYY-MM-DD). This schema is used to ensure that date inputs are correctly formatted.
+
+- **Project Schema**: This schema aligns with the JSON Resume standard and includes fields such as `name`, `startDate`, `endDate`, `description`, `highlights`, and `url`. Each field has specific validation rules, such as minimum string lengths and optionality.
+
+- **Skill Schema**: Designed to categorize skills, this schema includes fields like `name`, `level`, and `keywords`. It allows for optional fields, providing flexibility in skill representation.
+
+- **Resume Update Schema**: This schema is intended for use in OpenAI function calls, encapsulating new projects, new skills, and a list of changes. It leverages the previously defined `projectSchema` and `skillSchema` to ensure comprehensive validation.
+
+- **Type Definitions**: The file also exports TypeScript types (`Skill`, `Project`, `ResumeUpdate`) inferred from the schemas, facilitating type-safe operations throughout the codebase.
+
+### Dependencies
+This file does not import or export any other files within the repository, indicating that it functions independently. However, it relies on the Zod library for schema creation and validation.
+
+### Usage Examples
+To use these schemas, import them into your TypeScript files where data validation is required. For instance:
+
+```typescript
+import { projectSchema } from './schemas';
+
+const projectData = {
+  name: "New Project",
+  startDate: "2023-01-01",
+  description: "A detailed project description."
+};
+
+const validationResult = projectSchema.safeParse(projectData);
+if (!validationResult.success) {
+  console.error(validationResult.error.format());
+}
+```
+
+### Best Practices
+- **Consistent Validation**: Use these schemas consistently across your application to ensure data integrity and reduce errors.
+- **Error Handling**: Always handle validation errors gracefully, providing meaningful feedback to users or logging errors for debugging.
+- **Schema Updates**: When updating schemas, ensure backward compatibility or provide migration paths for existing data.
+
+By adhering to these practices, developers can maintain robust data validation processes, enhancing the reliability and maintainability of the application.

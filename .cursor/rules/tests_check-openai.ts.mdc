@@ -1,0 +1,37 @@
+---
+description: This file tests the validity of the OpenAI API key by making a simple API request.
+globs: ['tests/check-openai.ts']
+alwaysApply: false
+---
+
+## Overview
+
+The `tests/check-openai.ts` file is designed to verify the validity of the OpenAI API key by making a simple API request to the OpenAI service. This script is useful for ensuring that the API key is correctly set up and functional before proceeding with more complex operations that depend on OpenAI's services.
+
+## Key Components
+
+- **Environment Variable Validation**: The script begins by checking if the `OPENAI_API_KEY` environment variable is set. If not, it throws an error, indicating that the API key is required for the script to function.
+
+- **OpenAI API Initialization**: It initializes the OpenAI client using the provided API key. This step is crucial for making any requests to the OpenAI API.
+
+- **API Request**: The script performs a simple completion request using the `gpt-3.5-turbo` model. It sends a message asking the model to "Say hello" and limits the response to a maximum of 5 tokens.
+
+- **Error Handling**: The script includes a try-catch block to handle any errors that occur during the API request, logging them to the console for debugging purposes.
+
+## Dependencies
+
+This file does not import any other files from the repository, nor is it imported by any other files. It operates independently, focusing solely on testing the OpenAI API key.
+
+## Usage
+
+To use this script, ensure that the `OPENAI_API_KEY` environment variable is set in your environment. Run the script using a Node.js environment to check the validity of your OpenAI API key. If the key is valid, the script will log a success message and the response from the API. If not, it will log an error message.
+
+## Best Practices
+
+- **Environment Configuration**: Always ensure that the `OPENAI_API_KEY` is correctly set in your environment before running this script.
+
+- **Error Monitoring**: Pay attention to the error messages logged by the script. They can provide valuable insights into issues with the API key or network connectivity.
+
+- **Security**: Keep your API key secure and do not expose it in public repositories or logs.
+
+- **Testing**: Use this script as a preliminary test before deploying applications that rely on OpenAI's services to ensure that your API key is valid and functional.

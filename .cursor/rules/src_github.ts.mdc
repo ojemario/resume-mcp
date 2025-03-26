@@ -1,0 +1,51 @@
+---
+description: This file defines a service for interacting with GitHub, including fetching user profiles, managing gists, and retrieving repository information.
+globs: ['src/github.ts']
+alwaysApply: false
+---
+
+# GitHub Service Documentation
+
+## Overview
+The `GitHubService` class in `src/github.ts` provides a set of methods to interact with GitHub's API. It leverages the `Octokit` library to perform operations such as fetching user profiles, managing gists, and retrieving repository information. This service is designed to facilitate the integration of GitHub functionalities into applications, particularly focusing on handling user resumes stored as gists.
+
+## Key Components
+
+### Class: `GitHubService`
+- **Constructor**: Initializes the service with a GitHub token and username. Throws an error if either is missing.
+- **Methods**:
+  - `getUserProfile()`: Fetches the GitHub profile of the specified user.
+  - `getResumeFromGists()`: Retrieves a `resume.json` file from the user's gists, caching the gist ID for efficiency.
+  - `createSampleResume()`: Creates a new gist with a sample `resume.json` if none exists.
+  - `updateResume(resume: Resume)`: Updates an existing `resume.json` gist or creates a new one if necessary.
+  - `getUserRepositories()`: Lists the user's repositories, sorted by the most recently updated.
+  - `getRepoContributions(owner: string, repo: string)`: Fetches the user's contributions to a specified repository.
+
+## Dependencies
+This file imports the `Octokit` library for GitHub API interactions and a `Resume` type from `./types.js`. It does not import or export any other files within the codebase, indicating it functions as a standalone service.
+
+## Usage Examples
+- **Fetching User Profile**:
+  ```javascript
+  const gitHubService = new GitHubService('your-token', 'username');
+  const profile = await gitHubService.getUserProfile();
+  console.log(profile);
+  ```
+- **Managing Resumes**:
+  ```javascript
+  const resume = await gitHubService.getResumeFromGists();
+  if (!resume) {
+    await gitHubService.createSampleResume();
+  } else {
+    resume.basics.name = 'Updated Name';
+    await gitHubService.updateResume(resume);
+  }
+  ```
+
+## Best Practices
+- **Token and Username**: Ensure that a valid GitHub token and username are provided when initializing the `GitHubService` to avoid authentication errors.
+- **Error Handling**: Implement robust error handling when calling service methods, as network issues or API changes can lead to exceptions.
+- **Caching**: Utilize the caching mechanism for gist IDs to reduce API calls and improve performance.
+- **Data Privacy**: Be cautious with user data, especially when handling personal information in resumes.
+
+This documentation should help developers understand the purpose and functionality of the `GitHubService` class, enabling them to effectively integrate GitHub features into their applications.

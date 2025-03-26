@@ -1,0 +1,60 @@
+---
+description: This file defines TypeScript interfaces for a JSON Resume schema, providing a structured way to represent resume data.
+globs: ['src/types.ts']
+alwaysApply: false
+---
+
+## Overview
+The `src/types.ts` file is a TypeScript module that defines interfaces for a JSON Resume schema. These interfaces provide a structured way to represent various components of a resume, such as personal information, work experience, education, skills, and more. This file is based on the schema provided by [JSON Resume](https://jsonresume.org/schema/), a community-driven open-source initiative to create a standard format for resumes.
+
+## Key Components
+
+### Interfaces
+- **`Resume`**: The main interface that aggregates all other components of a resume. It includes optional fields for basics, work, volunteer experience, education, awards, certificates, publications, skills, languages, interests, references, projects, and meta information.
+
+- **`Basics`**: Contains personal information such as name, label, image, email, phone, URL, summary, location, and social profiles.
+
+- **`Location`**: Represents geographical information including address, postal code, city, country code, and region.
+
+- **`Profile`**: Describes social profiles with fields for network, username, and URL.
+
+- **`Work`, `Volunteer`, `Education`, `Award`, `Certificate`, `Publication`, `Skill`, `Language`, `Interest`, `Reference`, `Project`**: Each of these interfaces represents a specific section of a resume, with fields relevant to that section.
+
+- **`Meta`**: Contains metadata about the resume, such as canonical URL, version, and last modified date.
+
+### Sample Data
+- **`sampleResume`**: An example object conforming to the `Resume` interface, providing a template for developers to understand how to structure resume data using these interfaces.
+
+## Dependencies
+This file is self-contained and does not import or export any other files within the repository. It serves as a standalone module for defining types related to the JSON Resume schema.
+
+## Usage Examples
+Developers can use these interfaces to type-check resume data in TypeScript applications. For instance, when building a resume editor or viewer, these interfaces ensure that the data adheres to the expected structure, reducing errors and improving code reliability.
+
+```typescript
+import { Resume } from './types';
+
+const myResume: Resume = {
+  basics: {
+    name: "John Doe",
+    email: "john.doe@example.com",
+    // other fields...
+  },
+  work: [
+    {
+      name: "Company Inc.",
+      position: "Developer",
+      startDate: "2020-01-01",
+      // other fields...
+    }
+  ],
+  // other sections...
+};
+```
+
+## Best Practices
+- **Consistency**: Ensure that all resume data adheres to the defined interfaces to maintain consistency across applications.
+- **Validation**: Use these interfaces in conjunction with validation libraries to enforce data integrity.
+- **Extensibility**: If additional fields are needed, extend the existing interfaces rather than modifying them directly to maintain compatibility with the JSON Resume schema.
+
+By following these guidelines, developers can effectively utilize the `src/types.ts` file to manage resume data in a structured and reliable manner.

@@ -1,0 +1,43 @@
+---
+description: This file is a test script for enhancing a resume using codebase analysis and AI services.
+globs: ['tests/debug-enhance.ts']
+alwaysApply: false
+---
+
+## Overview
+
+The `tests/debug-enhance.ts` file is a test script designed to demonstrate and validate the process of enhancing a resume by analyzing a codebase and utilizing AI services. It integrates with GitHub and OpenAI services to fetch data and perform operations that enhance a sample resume with insights derived from the current project.
+
+## Key Components
+
+- **Environment Variables**: The script requires three environment variables: `GITHUB_TOKEN`, `OPENAI_API_KEY`, and `GITHUB_USERNAME`. These are essential for authenticating and interacting with the GitHub and OpenAI services.
+
+- **Main Function**: The `main` function orchestrates the entire process:
+  - **Validation**: Checks for the presence of necessary environment variables.
+  - **Service Initialization**: Instantiates `GitHubService`, `OpenAIService`, `CodebaseAnalyzer`, and `ResumeEnhancer`.
+  - **Sample Resume Creation**: Constructs a basic resume object to be enhanced.
+  - **Codebase Analysis**: Utilizes `CodebaseAnalyzer` to gather insights about the current project.
+  - **Resume Enhancement**: Calls `enhanceWithCurrentProject` on `ResumeEnhancer` to update the resume with new skills and project details based on the analysis.
+  - **Error Handling**: Catches and logs any errors that occur during the process.
+
+## Dependencies
+
+This file imports several modules from the `src` directory:
+- `GitHubService` for interacting with GitHub repositories.
+- `OpenAIService` for leveraging AI capabilities.
+- `CodebaseAnalyzer` for analyzing the codebase structure and content.
+- `ResumeEnhancer` for applying enhancements to a resume.
+- `Resume` type for defining the structure of a resume object.
+
+## Usage
+
+To run this script, ensure that the required environment variables are set. Execute the script in a Node.js environment to see the enhancement process in action. This script is primarily used for testing and debugging the resume enhancement functionality.
+
+## Best Practices
+
+- **Environment Configuration**: Always ensure that the necessary environment variables are correctly set before running the script.
+- **Error Handling**: Pay attention to error messages for troubleshooting issues related to service initialization or API interactions.
+- **Codebase Context**: Use this script in the context of a well-defined codebase to get meaningful enhancements.
+- **Security**: Keep your API keys and tokens secure and do not hardcode them into the script.
+
+This file serves as a practical example of integrating multiple services to enhance a resume, providing a useful template for similar tasks in other projects.

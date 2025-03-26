@@ -1,0 +1,434 @@
+# AI-Powered Resume Tailoring MCP: Implementation Plan
+
+## Overview
+
+This document outlines the complete implementation plan for transforming the JsonResume MCP from a codebase analyzer to an advanced AI-powered resume tailoring tool. The system will analyze job descriptions, understand company/role context, and intelligently tailor resumes to maximize matching and ATS optimization.
+
+## Best Practices
+
+- **Modular Development**: Build each component independently with clear interfaces
+- **Test-Driven Development**: Create tests for each module before implementation
+- **Progressive Enhancement**: Implement basic functionality first, then add advanced features
+- **Prompt Engineering**: Design and test AI prompts carefully for optimal results
+- **Error Handling**: Implement robust error handling throughout the application
+- **Caching**: Cache API responses and analysis results to improve performance and reduce costs
+- **Security**: Validate all inputs, especially URLs for web scraping
+- **Documentation**: Document each module, class, and function thoroughly
+
+## Checklist Maintenance
+
+- Update the checklist in this file as items are completed
+- Mark items with ✅ when completed
+- Add details about implementation decisions in the notes section
+- Add new tasks as they are identified during implementation
+
+## Project Structure Modifications
+
+### Directory Structure
+
+```
+resume-mcp/
+├── src/
+│   ├── job-analyzer/          # New directory
+│   │   ├── index.ts
+│   │   ├── job-parser.ts
+│   │   ├── company-context.ts
+│   │   ├── role-context.ts
+│   │   └── requirement-extractor.ts
+│   ├── resume-tailorer/       # New directory
+│   │   ├── index.ts
+│   │   ├── semantic-matcher.ts
+│   │   ├── ats-optimizer.ts
+│   │   ├── gap-analyzer.ts
+│   │   └── achievement-transformer.ts
+│   ├── prompts/               # New directory
+│   │   ├── job-analysis.ts
+│   │   ├── resume-analysis.ts
+│   │   ├── tailoring-strategy.ts
+│   │   └── content-generation.ts
+│   ├── web/                   # New directory
+│   │   ├── scraper.ts
+│   │   └── content-cleaner.ts
+│   ├── github.ts              # Modified file
+│   ├── openai.ts              # Modified file
+│   ├── types.ts               # Modified file
+│   └── schemas.ts             # Modified file
+```
+
+### New and Modified Files
+
+| File | Action | Status | Notes |
+|------|--------|--------|-------|
+| `src/job-analyzer/index.ts` | Create | ⬜ | |
+| `src/job-analyzer/job-parser.ts` | Create | ⬜ | |
+| `src/job-analyzer/company-context.ts` | Create | ⬜ | |
+| `src/job-analyzer/role-context.ts` | Create | ⬜ | |
+| `src/job-analyzer/requirement-extractor.ts` | Create | ⬜ | |
+| `src/resume-tailorer/index.ts` | Create | ⬜ | |
+| `src/resume-tailorer/semantic-matcher.ts` | Create | ⬜ | |
+| `src/resume-tailorer/ats-optimizer.ts` | Create | ⬜ | |
+| `src/resume-tailorer/gap-analyzer.ts` | Create | ⬜ | |
+| `src/resume-tailorer/achievement-transformer.ts` | Create | ⬜ | |
+| `src/prompts/job-analysis.ts` | Create | ⬜ | |
+| `src/prompts/resume-analysis.ts` | Create | ⬜ | |
+| `src/prompts/tailoring-strategy.ts` | Create | ⬜ | |
+| `src/prompts/content-generation.ts` | Create | ⬜ | |
+| `src/web/scraper.ts` | Create | ⬜ | |
+| `src/web/content-cleaner.ts` | Create | ⬜ | |
+| `src/github.ts` | Modify | ⬜ | |
+| `src/openai.ts` | Modify | ⬜ | |
+| `src/types.ts` | Modify | ⬜ | |
+| `src/schemas.ts` | Modify | ⬜ | |
+| `index.ts` | Modify | ⬜ | |
+
+## New Class Implementation Details
+
+### JobAnalyzer
+
+```typescript
+export class JobAnalyzer {
+  private jobParser: JobParser;
+  private companyContext: CompanyContext;
+  private roleContext: RoleContext;
+  private requirementExtractor: RequirementExtractor;
+  
+  constructor() {
+    this.jobParser = new JobParser();
+    this.companyContext = new CompanyContext();
+    this.roleContext = new RoleContext();
+    this.requirementExtractor = new RequirementExtractor();
+  }
+  
+  async analyze(jobUrl: string): Promise<JobAnalysisResult> {
+    // Implementation
+  }
+  
+  async analyzeJobDescription(jobDescription: string): Promise<JobRequirements> {
+    // Implementation
+  }
+  
+  async analyzeCompanyContext(companyName: string): Promise<CompanyInfo> {
+    // Implementation
+  }
+  
+  async analyzeRoleContext(jobTitle: string, industry: string): Promise<RoleInfo> {
+    // Implementation
+  }
+}
+```
+
+### ResumeTailorer
+
+```typescript
+export class ResumeTailorer {
+  private semanticMatcher: SemanticMatcher;
+  private atsOptimizer: ATSOptimizer;
+  private gapAnalyzer: GapAnalyzer;
+  private achievementTransformer: AchievementTransformer;
+  private openAIService: OpenAIService;
+  
+  constructor(openAIService: OpenAIService) {
+    this.openAIService = openAIService;
+    this.semanticMatcher = new SemanticMatcher();
+    this.atsOptimizer = new ATSOptimizer();
+    this.gapAnalyzer = new GapAnalyzer();
+    this.achievementTransformer = new AchievementTransformer();
+  }
+  
+  async tailorResumeForJob(
+    resume: Resume,
+    jobAnalysis: JobAnalysisResult
+  ): Promise<TailoringResult> {
+    // Implementation
+  }
+}
+```
+
+### WebScraper
+
+```typescript
+export class WebScraper {
+  async scrapeJobDescription(url: string): Promise<string> {
+    // Implementation
+  }
+  
+  async scrapeCompanyInfo(url: string): Promise<CompanyInfo> {
+    // Implementation
+  }
+}
+```
+
+## AI Prompt Engineering Implementation
+
+### Job Analysis Prompts
+
+```typescript
+export const JOB_ANALYSIS_SYSTEM_PROMPT = `
+You are an expert job analyst with deep knowledge of industry-specific requirements,
+job roles, and hiring practices. Your task is to analyze a job description and extract:
+
+1. Explicit requirements: Required skills, experience, education, certifications
+2. Implicit requirements: Soft skills, working style, cultural fit indicators
+3. Company context: Industry position, company stage, team structure
+4. Role context: Reporting relationships, team size, responsibilities
+
+Format your response as a structured JSON object matching the JobAnalysisResult type.
+`;
+
+export const JOB_ANALYSIS_EXAMPLES = [
+  {
+    input: "Example job description...",
+    output: {
+      // Example structured output
+    }
+  },
+  // More examples
+];
+```
+
+### Important Prompt Engineering Considerations
+
+- System messages should be clear and directive
+- Include structured output format in the prompt
+- Provide 2-3 few-shot examples for complex transformations
+- Test prompts on different job descriptions and resume types
+- Refine prompts based on output quality
+- Include error handling guidance in prompts
+
+## Enhanced TypeScript Interface Definitions
+
+```typescript
+// Key new interfaces
+
+export interface JobAnalysisResult {
+  jobTitle: string;
+  company: string;
+  location: string;
+  requirements: {
+    skills: Skill[];
+    experience: Experience[];
+    education: Education[];
+    certifications: string[];
+  };
+  implicitRequirements: {
+    softSkills: string[];
+    workingStyle: string[];
+    culturalFit: string[];
+  };
+  companyContext: CompanyInfo;
+  roleContext: RoleInfo;
+}
+
+export interface TailoringResult {
+  originalResume: Resume;
+  tailoredResume: Resume;
+  changes: {
+    skills: SkillChange[];
+    experience: ExperienceChange[];
+    summary: string;
+    other: string[];
+  };
+  matchRate: number;
+  gapAnalysis: {
+    criticalGaps: string[];
+    partialMatches: string[];
+    recommendations: string[];
+  };
+  atsOptimization: {
+    keywords: KeywordOptimization[];
+    formatSuggestions: string[];
+    overallScore: number;
+  };
+}
+```
+
+## MCP Server Tool Definitions
+
+```typescript
+// New MCP tools to be defined in index.ts
+
+const ANALYZE_JOB_DESCRIPTION_TOOL: Tool = {
+  name: "job_analyze_description",
+  description: "This is a tool from the resume MCP server.\nAnalyzes a job description from a URL and extracts requirements, context, and company information",
+  inputSchema: {
+    type: "object",
+    properties: {
+      url: {
+        type: "string",
+        description: "URL of the job description to analyze",
+      },
+    },
+    required: ["url"],
+  },
+};
+
+const TAILOR_RESUME_TOOL: Tool = {
+  name: "job_tailor_resume",
+  description: "This is a tool from the resume MCP server.\nTailors a resume for a specific job description to maximize matching and ATS optimization",
+  inputSchema: {
+    type: "object",
+    properties: {
+      jobUrl: {
+        type: "string",
+        description: "URL of the job description",
+      },
+      tailoringLevel: {
+        type: "string",
+        description: "Level of tailoring to apply (light, moderate, comprehensive)",
+        enum: ["light", "moderate", "comprehensive"],
+      },
+    },
+    required: ["jobUrl"],
+  },
+};
+
+// Additional tools to be defined...
+```
+
+## Implementation Phases
+
+### Phase 1: Core Infrastructure
+
+- [ ] Set up new directory structure
+- [ ] Create base classes with interfaces
+- [ ] Implement web scraping functionality
+- [ ] Update type definitions and schemas
+
+### Phase 2: Job Analysis Components 
+- [ ] Implement `JobParser` for text extraction
+- [ ] Create `CompanyContext` analyzer
+- [ ] Build `RoleContext` analyzer
+- [ ] Develop `RequirementExtractor`
+- [ ] Integrate OpenAI for analysis
+
+### Phase 3: Resume Tailoring Components 
+
+- [ ] Implement `SemanticMatcher`
+- [ ] Create `ATSOptimizer`
+- [ ] Develop `GapAnalyzer`
+- [ ] Build `AchievementTransformer`
+- [ ] Integrate OpenAI for tailoring
+
+### Phase 4: AI Prompt Engineering 
+
+- [ ] Design and implement all prompt templates
+- [ ] Create example pairs for few-shot learning
+- [ ] Build prompt composition system
+- [ ] Test and refine prompts
+
+### Phase 5: MCP Server integration
+
+- [ ] Define and implement new MCP tools
+- [ ] Update handler functions
+- [ ] Modify GitHub integration
+- [ ] Test end-to-end functionality
+
+### Phase 6: Testing and Refinement 
+
+- [ ] Create comprehensive test suite
+- [ ] Test with diverse job descriptions
+- [ ] Refine algorithms based on results
+- [ ] Optimize performance
+
+## Detailed Implementation Checklist
+
+### Core Infrastructure
+
+- [ ] Create new directories in src/
+- [ ] Define base interfaces in types.ts
+- [ ] Implement WebScraper class
+- [ ] Implement content cleaner functionality
+- [ ] Update package.json with new dependencies
+- [ ] Create README updates
+
+### Job Analysis
+
+- [ ] Implement JobParser
+- [ ] Create structured extraction logic
+- [ ] Build company research functionality
+- [ ] Implement role context analyzer
+- [ ] Create skills and requirements extractor
+- [ ] Integrate with OpenAI API
+- [ ] Implement caching system
+
+### Resume Tailoring
+
+- [ ] Build semantic matching algorithm
+- [ ] Implement ATS keyword optimization
+- [ ] Create gap analysis functionality
+- [ ] Develop achievement transformation
+- [ ] Implement tailoring strategy generator
+- [ ] Build content generation system
+- [ ] Create version tracking
+
+### AI Prompt Engineering
+
+- [ ] Design system messages for all components
+- [ ] Create few-shot examples
+- [ ] Implement prompt templates
+- [ ] Build dynamic prompt composition
+- [ ] Create feedback mechanism for prompt improvement
+
+### MCP Server Integration
+
+- [ ] Define new tool schemas
+- [ ] Implement handler functions
+- [ ] Update GitHub integration
+- [ ] Create new test scripts
+- [ ] Implement error handling
+- [ ] Add logging
+
+## Dependencies and Environment
+
+```json
+{
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.3",
+    "axios": "^1.8.1",
+    "cheerio": "^1.0.0",
+    "octokit": "^3.2.1",
+    "openai": "^4.86.1",
+    "zod": "^3.22.4"
+  }
+}
+```
+
+## Important Implementation Notes
+
+1. **Web Scraping Considerations**:
+   - Handle different job board formats (LinkedIn, Indeed, Greenhouse, etc.)
+   - Implement proper rate limiting to avoid IP blocks
+   - Use appropriate user agents and request headers
+   - Consider implementing proxy support for production use
+
+2. **OpenAI API Usage**:
+   - Optimize token usage to reduce costs
+   - Implement fallback strategies for API failures
+   - Consider using different models for different tasks (GPT-4 for analysis, GPT-3.5 for simpler tasks)
+   - Implement proper error handling for token limits and timeouts
+
+3. **Testing Approach**:
+   - Create a diverse set of test job descriptions across industries
+   - Test with different resume formats and content depths
+   - Create mock APIs for testing to avoid excessive API calls
+   - Implement unit tests for core functionality
+
+4. **Performance Optimizations**:
+   - Implement caching for job descriptions and analysis results
+   - Consider extracting only relevant sections of web pages
+   - Use compression for storing intermediate results
+   - Implement timeout handling for external services
+
+5. **Version Control**:
+   - Keep track of all versions of tailored resumes
+   - Implement diffing to show changes clearly
+   - Allow reverting to previous versions
+   - Store metadata about the job each version was tailored for
+
+## Getting Started
+
+1. Begin with setting up the new directory structure
+2. Implement the WebScraper as the first component
+3. Create the core interfaces and types
+4. Build the JobAnalyzer components one by one
+5. Update this checklist as items are completed 

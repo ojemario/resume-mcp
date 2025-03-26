@@ -1,0 +1,35 @@
+---
+description: This directory contains TypeScript files that enhance and interact with various services and data structures.
+globs: ['src/*']
+alwaysApply: false
+---
+
+## Overview
+
+The `src` directory is a central hub for TypeScript files that provide functionality for enhancing resumes, interacting with GitHub, defining schemas, and integrating with OpenAI. It serves as a core component of the application, encapsulating logic and data structures that are crucial for the application's operations.
+
+## Key Files and Their Roles
+
+- **resume-enhancer.ts**: This file contains logic to enhance resumes, possibly by adding or modifying content to improve presentation or relevance.
+- **github.ts**: This file manages interactions with GitHub, likely handling API requests and data processing related to GitHub repositories or user profiles.
+- **schemas.ts**: This file defines data schemas, ensuring consistent data structures across the application. It is essential for data validation and integrity.
+- **openai.ts**: This file integrates with OpenAI's API, facilitating AI-driven functionalities such as natural language processing or content generation.
+- **types.ts**: This file contains TypeScript type definitions, providing type safety and clarity across the codebase.
+- **codebase.ts**: This file likely contains logic related to the overall codebase management, possibly including utilities or functions that support other files.
+
+## Relationship to Other Parts of the Codebase
+
+The `src` directory operates independently, with no external dependencies or imports. This isolation suggests that it provides foundational services or utilities that other parts of the application might leverage indirectly.
+
+## Common Patterns and Conventions
+
+- **TypeScript Usage**: All files are written in TypeScript, emphasizing type safety and modern JavaScript features.
+- **Modular Design**: Each file focuses on a specific aspect of the application, promoting separation of concerns and easier maintenance.
+
+## Best Practices
+
+- **Maintain Type Safety**: When modifying or adding new files, ensure that TypeScript types are used consistently to prevent runtime errors.
+- **Follow Existing Patterns**: Adhere to the established modular design by keeping functionalities well-defined and isolated within their respective files.
+- **Document Changes**: As this directory serves as a core part of the application, document any changes or additions to facilitate understanding and collaboration among team members.
+
+By understanding the structure and purpose of the `src` directory, developers can effectively navigate and contribute to the codebase, ensuring robust and scalable application development.

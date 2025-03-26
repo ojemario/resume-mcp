@@ -1,0 +1,44 @@
+---
+description: This file contains a mock implementation for testing the resume enhancement functionality using a simulated OpenAI service.
+globs: ['tests/debug-mock.ts']
+alwaysApply: false
+---
+
+## Overview
+
+The `tests/debug-mock.ts` file is designed to facilitate testing of the resume enhancement functionality by using a mock implementation of an OpenAI service. This allows developers to simulate the behavior of the resume enhancement process without relying on actual external services, making it easier to test and debug the code.
+
+## Key Components
+
+### MockOpenAIService Class
+
+- **Purpose**: This class simulates the behavior of an OpenAI service that generates resume enhancements.
+- **Methods**:
+  - `generateResumeEnhancement()`: Returns a mock `ResumeUpdate` object containing a new project and skills to be added to a resume.
+  - `enhanceResume(resume: Resume, update: ResumeUpdate)`: Takes a `Resume` and a `ResumeUpdate` object, and returns an enhanced resume with the new project and skills added.
+  - `generateUpdateSummary(changes: string[])`: Provides a summary of the changes made to the resume.
+
+### testEnhanceWithMock Function
+
+- **Purpose**: This asynchronous function tests the resume enhancement process using the `MockOpenAIService`.
+- **Process**:
+  - Creates a sample resume and a sample codebase analysis.
+  - Uses the `MockOpenAIService` to simulate the enhancement process.
+  - Logs the results, including the summary of changes and any added skills or updated projects.
+  - Handles errors by logging them and rethrowing.
+
+## Dependencies
+
+This file does not import or export any other files within the repository, making it a standalone test script. It relies on the `ResumeEnhancer` class and types from the `src` directory to perform its operations.
+
+## Usage
+
+To run the test, execute the script using a Node.js environment. The script will simulate the resume enhancement process and log the results to the console. This is useful for verifying that the enhancement logic works as expected without needing access to the actual OpenAI service.
+
+## Best Practices
+
+- **Isolation**: Use this mock implementation to isolate and test the resume enhancement logic without external dependencies.
+- **Error Handling**: Ensure that any errors during the test are logged and handled appropriately to aid in debugging.
+- **Extendability**: Consider extending the mock service to simulate different scenarios and edge cases for more comprehensive testing.
+
+By understanding and utilizing the `tests/debug-mock.ts` file, developers can efficiently test and validate the resume enhancement functionality in a controlled environment.

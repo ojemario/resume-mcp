@@ -1,0 +1,31 @@
+---
+description: This Dockerfile sets up a Node.js environment for building and running a project using esbuild.
+globs: ['Dockerfile']
+alwaysApply: false
+---
+
+### Overview
+This Dockerfile is used to create a Docker image that sets up a Node.js environment for building and running a project. It leverages the lightweight `node:lts-alpine` base image, which is optimized for minimal size and security. The Dockerfile automates the installation of dependencies, builds the project using esbuild, and specifies the command to run the application.
+
+### Key Components
+- **Base Image**: `FROM node:lts-alpine` - This line specifies the base image for the Docker container, which is a lightweight version of Node.js suitable for production environments.
+- **Working Directory**: `WORKDIR /app` - Sets the working directory inside the container to `/app`, where all subsequent commands will be executed.
+- **Copy Package Manifest**: `COPY package.json package-lock.json ./` - Copies the package manifest files into the container, which are necessary for installing dependencies.
+- **Install Dependencies**: `RUN npm install --ignore-scripts` - Installs the project dependencies without executing any scripts, which can help avoid potential issues during the build process.
+- **Copy Source Files**: `COPY . .` - Copies all the source files from the host to the container, preparing them for the build process.
+- **Build Project**: `RUN npm run build` - Executes the build script defined in the `package.json`, typically using esbuild to compile the project.
+- **Run Command**: `CMD ["node", "dist/index.cjs"]` - Specifies the command to run the application, using the built artifact located at `dist/index.cjs`.
+
+### Dependencies
+This Dockerfile does not import or export any files within the repository. It operates independently to create a Docker image that encapsulates the application environment.
+
+### Usage
+To build and run the Docker image:
+1. **Build the Image**: Run `docker build -t my-node-app .` in the terminal, where `my-node-app` is the desired name for the Docker image.
+2. **Run the Container**: Execute `docker run -p 3000:3000 my-node-app` to start the container and map the application to port 3000 on the host.
+
+### Best Practices
+- **Security**: Regularly update the base image to the latest version to incorporate security patches.
+- **Efficiency**: Use multi-stage builds if the build process becomes complex or if you need to reduce the final image size.
+- **Environment Variables**: Consider using environment variables for configuration settings to make the Docker image more flexible and adaptable to different environments.
+- **Port Exposure**: Explicitly expose necessary ports using the `EXPOSE` instruction if the application requires network access.

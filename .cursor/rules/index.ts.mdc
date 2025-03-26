@@ -1,0 +1,51 @@
+---
+description: This file sets up and runs a server for the JsonResume MCP, providing tools for analyzing codebases and enhancing GitHub user resumes.
+globs: ['index.ts']
+alwaysApply: false
+---
+
+# JsonResume MCP Server Documentation
+
+## Overview
+The `index.ts` file is the main entry point for the JsonResume Model Context Protocol (MCP) server. It initializes and runs a server that provides several tools for interacting with GitHub user data and codebases. The server is designed to handle requests for analyzing codebases, checking for JSON resumes, and enhancing resumes with project information.
+
+## Key Components
+
+### Imports
+- **Server & StdioServerTransport**: From the MCP SDK, these are used to create and manage the server.
+- **Schemas and Types**: Various schemas and types are imported to define request structures and error handling.
+- **Services**: Custom services like `GitHubService`, `OpenAIService`, `CodebaseAnalyzer`, and `ResumeEnhancer` are imported to provide specific functionalities.
+
+### Environment Variables
+- **GITHUB_TOKEN, OPENAI_API_KEY, GITHUB_USERNAME**: These are required for authenticating and interacting with GitHub and OpenAI services.
+
+### Initialization
+- **Service Initialization**: The file checks for necessary environment variables and initializes services for GitHub and OpenAI interactions, codebase analysis, and resume enhancement.
+
+### Tools
+- **ANALYZE_CODEBASE_TOOL**: Analyzes the current codebase to provide insights into technologies, languages, and commits.
+- **CHECK_RESUME_TOOL**: Checks if a GitHub user has a JSON Resume and retrieves it.
+- **ENHANCE_RESUME_WITH_PROJECT_TOOL**: Enhances a user's JSON Resume with information from their current project.
+
+### Functions
+- **doHello**: A simple function to return a greeting message.
+- **analyzeCodebase**: Analyzes a specified directory or the current working directory for codebase insights.
+- **checkResume**: Retrieves a user's resume from GitHub gists.
+- **enhanceResumeWithProject**: Enhances a resume with project details and updates it on GitHub.
+
+### Server Setup
+- **Request Handlers**: The server is configured to handle requests for each tool using schemas.
+- **Error Handling**: Logs errors and handles server shutdown gracefully.
+
+## Dependencies
+This file does not import or export any other files within the repository, making it a standalone entry point for the server.
+
+## Usage Examples
+To run the server, ensure that the required environment variables are set and execute the file. The server will listen for requests on standard input/output and provide responses based on the tools defined.
+
+## Best Practices
+- **Environment Configuration**: Ensure all necessary environment variables are set before running the server.
+- **Error Handling**: Implement additional error handling as needed to manage unexpected scenarios.
+- **Tool Expansion**: To add new tools, define them similarly to existing ones and register them with the server.
+
+This documentation should help developers understand the purpose and functionality of the `index.ts` file, facilitating easier maintenance and expansion of the JsonResume MCP server.

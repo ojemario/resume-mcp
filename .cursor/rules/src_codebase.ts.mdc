@@ -1,0 +1,54 @@
+---
+description: This file provides a comprehensive analysis of a codebase, extracting details such as repository information, file counts by language, recent commits, and technologies used.
+globs: ['src/codebase.ts']
+alwaysApply: false
+---
+
+# Codebase Analyzer Documentation
+
+## Overview
+The `CodebaseAnalyzer` class in `src/codebase.ts` is designed to perform a detailed analysis of a codebase. It extracts various pieces of information such as repository details, file counts by language, recent commits, and technologies used. This is particularly useful for understanding the structure and components of a project, especially in large or unfamiliar codebases.
+
+## Key Components
+
+### Imports
+- **fs**: Used for file system operations.
+- **path**: Provides utilities for handling and transforming file paths.
+- **child_process**: Used to execute shell commands.
+- **util**: Used to promisify callback-based functions.
+
+### Interfaces
+- **CodebaseAnalysisResult**: Defines the structure of the analysis result, including repository name, description, languages, file count, recent commits, technologies, summary, and README content.
+
+### Class: `CodebaseAnalyzer`
+- **Constructor**: Initializes the analyzer with a root directory, defaulting to the current working directory if none is provided.
+
+#### Methods
+- **getRepoDetails**: Retrieves the repository name, owner, and description by parsing the remote URL and reading `package.json` if available.
+- **countFilesByLanguage**: Counts the number of files by their language (file extension) using `git ls-files` or a directory walk as a fallback.
+- **walkDirectory**: Recursively walks through directories to count files by extension.
+- **getRecentCommits**: Fetches recent commit details from the repository.
+- **detectTechnologies**: Identifies technologies used in the project by checking for common configuration files and dependencies.
+- **countFiles**: Counts the total number of files in the repository using a shell command.
+- **getReadmeContent**: Reads the content of `README.md` if it exists.
+- **analyze**: Orchestrates the analysis process, compiling all gathered information into a `CodebaseAnalysisResult`.
+
+## Dependencies
+This file operates independently and does not import or export any other files within the repository. It relies on Node.js built-in modules and shell commands to perform its operations.
+
+## Usage Example
+To use the `CodebaseAnalyzer`, instantiate it with the root directory of the codebase you wish to analyze:
+
+```typescript
+const analyzer = new CodebaseAnalyzer('/path/to/repo');
+analyzer.analyze().then(result => {
+  console.log(result);
+});
+```
+
+## Best Practices
+- Ensure that the root directory provided to the `CodebaseAnalyzer` is a valid Git repository to leverage the full capabilities of the class.
+- Handle potential errors gracefully, especially when dealing with file system operations and shell commands.
+- Regularly update the list of technologies detected to keep up with new frameworks and tools.
+
+This file serves as a powerful tool for developers to quickly gain insights into a codebase, making it easier to onboard new team members or assess the state of a project.

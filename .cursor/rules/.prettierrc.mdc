@@ -1,0 +1,43 @@
+---
+description: This file configures Prettier, a code formatter, to enforce consistent code style across the project.
+globs: ['.prettierrc']
+alwaysApply: false
+---
+
+### Overview
+
+The `.prettierrc` file is a configuration file for [Prettier](mdc:https:/prettier.io), a popular code formatter used to maintain consistent code style across a project. By defining specific formatting rules, it helps ensure that all contributors adhere to the same coding standards, which improves code readability and reduces the likelihood of style-related merge conflicts.
+
+### Key Components
+
+- **`printWidth`:** Sets the maximum line length. In this configuration, lines are wrapped at 100 characters.
+- **`tabWidth`:** Specifies the number of spaces per indentation level. Here, it is set to 2 spaces.
+- **`useTabs`:** Determines whether to use tabs for indentation. This is set to `false`, meaning spaces are used instead.
+- **`semi`:** Controls whether to add a semicolon at the end of statements. This is set to `true`, so semicolons are used.
+- **`singleQuote`:** Indicates whether to use single quotes instead of double quotes. This is set to `false`, so double quotes are used.
+- **`trailingComma`:** Configures the use of trailing commas in object and array literals. The `es5` setting adds trailing commas where valid in ES5 (objects, arrays, etc.).
+- **`bracketSpacing`:** Determines whether to add spaces between brackets in object literals. This is set to `true`, so spaces are added.
+- **`arrowParens`:** Specifies whether to include parentheses around a sole arrow function parameter. This is set to `always`, meaning parentheses are always included.
+- **`ignore`:** Lists patterns of files or directories to ignore. Here, the `dist/**/*` pattern ignores all files in the `dist` directory.
+
+### Dependencies
+
+This file does not import or export any modules and is not directly related to other files in the codebase. It serves as a standalone configuration file for Prettier.
+
+### Usage Examples
+
+To apply the formatting rules defined in this `.prettierrc` file, run Prettier from the command line:
+
+```bash
+npx prettier --write .
+```
+
+This command will format all files in the current directory and its subdirectories according to the rules specified in `.prettierrc`.
+
+### Best Practices
+
+- **Consistency:** Ensure that all team members use the same `.prettierrc` configuration to maintain a consistent code style across the project.
+- **Version Control:** Include the `.prettierrc` file in version control to ensure that the configuration is shared among all contributors.
+- **Integration:** Consider integrating Prettier with your code editor or IDE to automatically format code on save, reducing the need for manual formatting.
+
+By adhering to these guidelines, you can maintain a clean and consistent codebase that is easier to read and maintain.

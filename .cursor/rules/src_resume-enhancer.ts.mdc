@@ -1,0 +1,45 @@
+---
+description: This file defines the `ResumeEnhancer` class, which uses OpenAI to enhance resumes with project details.
+globs: ['src/resume-enhancer.ts']
+alwaysApply: false
+---
+
+## Overview
+The `src/resume-enhancer.ts` file is responsible for enhancing resumes by integrating details from current projects using OpenAI's capabilities. It defines the `ResumeEnhancer` class, which interacts with the OpenAI service to generate and apply updates to a resume based on codebase analysis results.
+
+## Key Components
+
+### Classes and Interfaces
+- **EnhancementResult**: An interface that outlines the structure of the result returned after a resume enhancement. It includes the updated resume, a summary of changes, and optional user messages and resume links.
+
+- **ResumeEnhancer**: The main class responsible for enhancing resumes. It utilizes the `OpenAIService` to fetch and apply updates to a resume.
+
+### Methods
+- **constructor(openAIService: OpenAIService)**: Initializes the `ResumeEnhancer` with an instance of `OpenAIService`.
+
+- **enhanceWithCurrentProject(resume: Resume, codebaseAnalysis: CodebaseAnalysisResult, githubUsername: string): Promise<EnhancementResult>**: Enhances a given resume with details from the current project. It logs the process, calls OpenAI for updates, applies these updates, and generates a summary and user message.
+
+- **createUserMessage(username: string, changes: string[]): string**: Generates a user-friendly message summarizing the changes made to the resume and provides a link to view the updated resume.
+
+## Dependencies
+This file imports the following modules:
+- **`Resume`** from `./types.js`: Represents the structure of a resume.
+- **`OpenAIService`** from `./openai.js`: Provides methods to interact with OpenAI for generating resume enhancements.
+- **`CodebaseAnalysisResult`** from `./codebase.js`: Represents the analysis results of a codebase, used to inform resume enhancements.
+
+## Usage
+To use the `ResumeEnhancer`, instantiate it with an `OpenAIService` and call `enhanceWithCurrentProject` with the necessary parameters:
+
+```typescript
+const openAIService = new OpenAIService();
+const resumeEnhancer = new ResumeEnhancer(openAIService);
+const enhancementResult = await resumeEnhancer.enhanceWithCurrentProject(resume, codebaseAnalysis, 'githubUsername');
+```
+
+## Best Practices
+- Ensure that the `OpenAIService` is properly configured and authenticated before using the `ResumeEnhancer`.
+- Handle errors gracefully when calling `enhanceWithCurrentProject`, as network or service issues may occur.
+- Review the changes suggested by OpenAI to ensure they align with the user's preferences and make manual adjustments if necessary.
+- Use the `resumeLink` provided in the `EnhancementResult` to verify the updated resume.
+
+This file plays a crucial role in automating the enhancement of resumes by leveraging AI, making it easier for developers to keep their professional profiles up-to-date with their latest project contributions.

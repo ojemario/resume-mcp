@@ -1,0 +1,42 @@
+---
+description: This file is a test script for running and interacting with the MCP server, ensuring it responds correctly to JSON-RPC requests.
+globs: ['tests/test-mcp.js']
+alwaysApply: false
+---
+
+## Overview
+
+The `tests/test-mcp.js` file is a Node.js script designed to test the functionality of the MCP (Modular Command Processor) server. It does so by spawning the server as a child process and sending JSON-RPC requests to it. The script checks for the presence of necessary environment variables and handles server responses, providing a basic framework for testing server interactions.
+
+## Key Components
+
+- **Environment Setup**: The script begins by setting up the environment, ensuring that critical environment variables like `GITHUB_TOKEN`, `OPENAI_API_KEY`, and `GITHUB_USERNAME` are present. If any of these are missing, the script will terminate with an error message.
+
+- **Spawning the MCP Server**: The MCP server is started as a child process using Node.js's `spawn` function. The path to the server executable is resolved relative to the script's location.
+
+- **Handling Server Output**: The script listens for data on the server's `stdout` and `stderr` streams. It attempts to parse `stdout` data as JSON and logs the output. If the data includes a list of tools, it triggers a `CallTool` request.
+
+- **JSON-RPC Messaging**: Two main JSON-RPC requests are sent to the server:
+  - **ListTools Request**: Sent shortly after the server starts, this request asks the server to list available tools.
+  - **CallTool Request**: If tools are available, a `CallTool` request is sent to invoke a specific tool (`github_enhance_resume_with_project`) with the current working directory as a parameter.
+
+- **Graceful Exit**: The script listens for a `SIGINT` signal (e.g., Ctrl+C) to terminate the server process and exit cleanly.
+
+## Dependencies
+
+This script does not import or depend on other files within the repository, nor is it imported by other files. It operates independently to test the MCP server.
+
+## Usage
+
+To use this script:
+1. Ensure the MCP server executable is built and located at `../dist/index.cjs` relative to this script.
+2. Set the required environment variables (`GITHUB_TOKEN`, `OPENAI_API_KEY`, `GITHUB_USERNAME`).
+3. Run the script using Node.js: `node tests/test-mcp.js`.
+
+## Best Practices
+
+- **Environment Variables**: Always ensure that the necessary environment variables are set before running the script to avoid unexpected terminations.
+- **Error Handling**: Consider expanding error handling to cover more potential issues, such as network errors or invalid server responses.
+- **Modularization**: For larger projects, consider breaking down the script into smaller, reusable modules or functions to enhance maintainability and readability.
+
+This script provides a foundational approach to testing server interactions and can be expanded or modified to suit more complex testing scenarios.

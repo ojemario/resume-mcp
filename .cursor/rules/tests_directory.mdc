@@ -1,0 +1,30 @@
+---
+description: This directory contains test and debugging scripts for the codebase.
+globs: ['tests/*']
+alwaysApply: false
+---
+
+## Overview
+The `tests` directory is dedicated to housing test scripts and debugging utilities for the codebase. It serves as a centralized location for ensuring code quality and functionality through various testing methodologies.
+
+## Key Files and Their Roles
+- **check-openai.ts**: This script is likely used to test functionalities related to OpenAI integrations, ensuring that API calls and responses are handled correctly.
+- **test-mcp.js**: A JavaScript file that might be responsible for testing the MCP (Model Control Protocol) components or similar features within the application.
+- **test-direct.js**: This file is probably used for direct testing of specific modules or functions, providing straightforward test cases.
+- **debug-enhance.ts**: A TypeScript file aimed at enhancing debugging capabilities, possibly by adding additional logging or diagnostic features.
+- **debug-mock.ts**: This script is used to create mock objects or environments for testing purposes, allowing developers to simulate various scenarios without affecting the live environment.
+
+## Relationship to Other Parts of the Codebase
+The `tests` directory operates independently, with no external dependencies or imports from other parts of the codebase. This isolation ensures that tests can be run without side effects, maintaining the integrity of the main application.
+
+## Common Patterns and Conventions
+- **File Naming**: Files are named to reflect their purpose, such as `test-` for testing scripts and `debug-` for debugging utilities.
+- **Language Use**: A mix of JavaScript and TypeScript is used, indicating flexibility in testing approaches and compatibility with different parts of the codebase.
+
+## Best Practices
+- **Isolation**: Keep tests isolated from the main application logic to prevent unintended interactions.
+- **Descriptive Naming**: Use clear and descriptive names for test cases and functions to improve readability and maintainability.
+- **Consistent Structure**: Follow a consistent structure for test files to make it easier for developers to add new tests or debug existing ones.
+- **Regular Updates**: Regularly update test scripts to reflect changes in the codebase, ensuring that tests remain relevant and effective.
+
+By adhering to these guidelines, developers can efficiently utilize the `tests` directory to maintain high code quality and facilitate smooth debugging processes.

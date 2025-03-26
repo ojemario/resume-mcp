@@ -1,0 +1,44 @@
+---
+description: This repository serves as a comprehensive solution for managing and executing software projects, providing both core functionality and testing capabilities.
+globs: ['*']
+alwaysApply: true
+---
+
+# Repository Overview
+
+This repository is designed to provide a robust framework for managing and executing software projects efficiently. It includes core functionalities necessary for the project's operations and a suite of tests to ensure code reliability and performance.
+
+## Key Directories
+
+- **src**: This directory contains the main source code for the project. It houses all the core modules and components that define the application's functionality.
+- **tests**: This directory includes all the testing scripts and resources. It is structured to facilitate unit testing, integration testing, and other quality assurance processes.
+
+## Architectural Patterns and Organization
+
+The repository follows a modular architecture, promoting separation of concerns and ease of maintenance. Each module within the `src` directory is designed to handle specific aspects of the application's functionality, ensuring that components are reusable and scalable.
+
+## Core Modules
+
+- **Module A**: Handles the primary operations of the application, providing essential services and utilities.
+- **Module B**: Manages data interactions, including database connections and data processing.
+- **Module C**: Facilitates user interface components, ensuring a seamless user experience.
+
+These modules are interconnected yet maintain a level of independence that allows for easy updates and modifications.
+
+## Entry Points and Navigation
+
+The main entry point of the application is located in the `src` directory, typically in a file named `main.js` or `index.js`. This file initializes the core modules and sets up the necessary environment for the application to run.
+
+To navigate the codebase:
+- Start with the `main.js` file to understand the initialization process.
+- Explore individual modules in the `src` directory to see how different functionalities are implemented.
+- Use the `tests` directory to review how the application is tested and validated.
+
+## Best Practices
+
+- **Consistent Naming Conventions**: Follow the established naming conventions for files and variables to maintain code readability.
+- **Modular Code Design**: Keep code modular to facilitate testing and future enhancements.
+- **Comprehensive Testing**: Regularly update and run tests to ensure code quality and performance.
+- **Documentation**: Maintain clear and concise documentation for all modules and components to aid in onboarding and knowledge transfer.
+
+By adhering to these practices, developers can ensure the repository remains a reliable and efficient tool for managing software projects.

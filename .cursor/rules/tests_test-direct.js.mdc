@@ -1,0 +1,38 @@
+---
+description: This file tests the integration of various services to enhance a user's resume with current project details.
+globs: ['tests/test-direct.js']
+alwaysApply: false
+---
+
+### Overview
+The `tests/test-direct.js` file is a Node.js script designed to test the integration of several services, including GitHub, OpenAI, and a codebase analyzer, to enhance a user's resume with details from the current project. It serves as a practical example of how these services can be orchestrated to automate resume updates based on project analysis.
+
+### Key Components
+- **Environment Variables**: The script requires three environment variables: `GITHUB_TOKEN`, `OPENAI_API_KEY`, and `GITHUB_USERNAME`. These are essential for authenticating and interacting with the respective services.
+- **Service Initialization**: The `init` function initializes the GitHub, OpenAI, Codebase Analyzer, and Resume Enhancer services. It checks for the necessary environment variables and throws an error if any are missing.
+- **Main Functionality**: The `enhanceResumeWithProject` function orchestrates the process of fetching a resume from GitHub, analyzing the current codebase, enhancing the resume with project details, and updating the resume back on GitHub.
+  - **Fetching Resume**: Retrieves the user's resume from GitHub gists. If no resume is found, a sample resume is created.
+  - **Codebase Analysis**: Analyzes the current project to extract information such as repository name, languages, and technologies used.
+  - **Resume Enhancement**: Enhances the resume with the analyzed project details using the Resume Enhancer service.
+  - **Updating Resume**: Updates the enhanced resume back on GitHub.
+
+### Dependencies
+This file imports several modules from the `src` directory:
+- `GitHubService`: Handles interactions with GitHub, such as fetching and updating resumes.
+- `OpenAIService`: Utilizes OpenAI's API for enhancing resume content.
+- `CodebaseAnalyzer`: Analyzes the current codebase to extract relevant project information.
+- `ResumeEnhancer`: Enhances the resume with project details using the OpenAI service.
+
+### Usage
+To run this script, ensure that the required environment variables are set. Execute the script using Node.js:
+```bash
+node tests/test-direct.js
+```
+This will initiate the process of enhancing the resume with the current project's details.
+
+### Best Practices
+- **Environment Setup**: Ensure that all required environment variables are correctly set before running the script.
+- **Error Handling**: The script includes error handling for missing environment variables and service initialization failures. Review and handle any errors that may arise during execution.
+- **Service Credentials**: Keep your GitHub and OpenAI credentials secure and do not hardcode them into the script.
+
+This file is a standalone test script and does not directly interact with other files in the repository, making it a useful tool for testing the integration of the services it utilizes.
